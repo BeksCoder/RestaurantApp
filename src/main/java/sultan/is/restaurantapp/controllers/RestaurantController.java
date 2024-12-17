@@ -2,6 +2,8 @@ package sultan.is.restaurantapp.controllers;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.*;
 import sultan.is.restaurantapp.dto.request.RestaurantRequest;
 import sultan.is.restaurantapp.dto.response.RestaurantResponse;
@@ -9,11 +11,11 @@ import sultan.is.restaurantapp.dto.response.SimpleResponse;
 import sultan.is.restaurantapp.services.RestaurantService;
 
 import java.util.List;
-
+@FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 @RestController
 @RequestMapping("/api/restaurant")
 public class RestaurantController {
-    private final RestaurantService restaurantService;
+      RestaurantService restaurantService;
 
     public RestaurantController(RestaurantService restaurantService) {
         this.restaurantService = restaurantService;

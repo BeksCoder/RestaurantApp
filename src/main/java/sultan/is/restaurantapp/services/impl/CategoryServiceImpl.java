@@ -4,17 +4,23 @@ import org.springframework.stereotype.Service;
 import sultan.is.restaurantapp.dto.request.CategoryRequest;
 import sultan.is.restaurantapp.dto.response.SimpleResponse;
 import sultan.is.restaurantapp.entities.Category;
+import sultan.is.restaurantapp.repositories.CategoryRepository;
 import sultan.is.restaurantapp.services.CategoryService;
 
 import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
+   private final CategoryRepository categoryRepository;
 
-   private final C
+    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+        this.categoryRepository = categoryRepository;
+    }
 
     @Override
     public SimpleResponse saveCategory(CategoryRequest categoryRequest) {
+        
+        categoryRepository.save()
 
         return null;
     }
