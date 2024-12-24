@@ -4,7 +4,6 @@ package sultan.is.restaurantapp.services;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import sultan.is.restaurantapp.dto.request.SubCategoryRequest;
-import sultan.is.restaurantapp.dto.response.CategoryResponse;
 import sultan.is.restaurantapp.dto.response.SimpleResponse;
 import sultan.is.restaurantapp.dto.response.SubcategoryResponse;
 
@@ -16,11 +15,11 @@ public interface SubCategoryService {
 
      List<SubcategoryResponse>  findSubCategoryByCategoryId(Long id);
 
-     SubCategoryService findById(Long id);
+     SubcategoryResponse findById(Long id);
 
      SimpleResponse updateSubCategory(Long id,SubCategoryRequest subCategoryRequest);
 
-     Page<CategoryResponse> findAllSubCategories(Pageable pageable);
+     Page<SubcategoryResponse> findAllSubCategories(Pageable pageable);
 
 
 

@@ -1,6 +1,9 @@
 package sultan.is.restaurantapp.services.impl;
 
 import jakarta.transaction.Transactional;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -19,14 +22,13 @@ import java.util.stream.Collectors;
 
 @Service
 @Slf4j
+@FieldDefaults(level  = AccessLevel.PRIVATE,makeFinal = true)
+@RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
-    private final RestaurantRepository restaurantRepository;
-    private final RestaurantMapper restaurantMapper;
+      RestaurantRepository restaurantRepository;
+      RestaurantMapper restaurantMapper;
 
-    public RestaurantServiceImpl(RestaurantRepository restaurantRepository, RestaurantMapper restaurantMapper) {
-        this.restaurantRepository = restaurantRepository;
-        this.restaurantMapper = restaurantMapper;
-    }
+
 
 
     @Override
@@ -45,7 +47,6 @@ public class RestaurantServiceImpl implements RestaurantService {
         return restaurants.stream()
                 .map(restaurantMapper::toRestaurantResponse)
                 .collect(Collectors.toList());
-
     }
 
     @Override
@@ -61,11 +62,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException(String.format("Restaurant with id %d not found", id))
         );
-        restaurant.setName(request.name());
-        restaurant.setLocation(request.location());
-        restaurant.setRestType(request.restType());
-        restaurant.setNumberOfEmployees(request.numberOfEmployees());
-        restaurant.setService(request.service());
+        restaurantMapper.updateRestaurantFromRequest(request,restaurant);
         restaurantRepository.save(restaurant);
         return new SimpleResponse(HttpStatus.OK, "Restaurant updated successfully with ID: " + restaurant.getId());
     }
@@ -74,7 +71,6 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     public SimpleResponse deleteById(Long id) {
-
       Restaurant restaurant =   restaurantRepository.findById(id).orElseThrow(
                 ()-> new ResourceNotFoundException(String.format("Restaurant with id %d not found",id))
         );

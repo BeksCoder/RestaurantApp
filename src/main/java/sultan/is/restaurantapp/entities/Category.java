@@ -7,6 +7,8 @@ import sultan.is.restaurantapp.entities.common.BaseEntity;
 
 import java.util.List;
 
+import static jakarta.persistence.CascadeType.PERSIST;
+
 @Entity
 @Table(name = "categories")
 @NoArgsConstructor
@@ -20,7 +22,7 @@ public class Category extends BaseEntity {
     private String name;
 
 
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "category", cascade = PERSIST,orphanRemoval = true)
     private List<SubCategory> subcategories;
 
 

@@ -1,13 +1,14 @@
 package sultan.is.restaurantapp.services;
 
+import org.springframework.data.domain.Page;
 import sultan.is.restaurantapp.dto.request.CategoryRequest;
 import sultan.is.restaurantapp.dto.response.CategoryResponse;
 import sultan.is.restaurantapp.dto.response.SimpleResponse;
-import java.util.List;
+import org.springframework.data.domain.Pageable;
 public interface CategoryService {
     SimpleResponse saveCategory(CategoryRequest categoryRequest);
 
-    List<CategoryResponse> findAllCategories();
+    Page<CategoryResponse> findAllCategories(Pageable pageable);
 
     CategoryResponse getById(Long id);
 

@@ -1,4 +1,6 @@
 package sultan.is.restaurantapp.dto.request;
 
-public class SubCategoryRequest {
+public record SubCategoryRequest(
+        String name
+) {
 }
